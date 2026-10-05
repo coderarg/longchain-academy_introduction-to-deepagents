@@ -140,3 +140,28 @@ brew install uv
 # Windows
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 ```
+
+```python
+# Para ignorar warnings por elementos deprecados (esto solo para fines educativos)
+import warnings
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+
+# Importar deepagents -> create_deep_agent para crear el agente
+from deepagents import create_deep_agent
+# Importar models -> para crear el modelo
+from models import model
+# Importar longchain_core.tools -> tool para poder utilizar las herramientas del agente.
+from langchain_core.tools import tool
+
+# Para poder utilizar las herramientas debemos utilizar el decorator @tool
+
+@tool
+def mi_funcion(parametro: str) -> str:
+    """Return one trivia fact about a classic arcade or console game. Call
+    with a lowercase game name, e.g. 'pac-man' or 'tetris'."""
+    key = game.strip().lower()
+    if key in RETRO_GAME_FACTS:
+        return RETRO_GAME_FACTS[key]
+    return f"No trivia on file for '{game}'. Known games: {', '.join(RETRO_GAME_FACTS)}."
+
+```
